@@ -1,4 +1,7 @@
 out
+
 .cache
+
 .vs
-.vscode
+
+bin
