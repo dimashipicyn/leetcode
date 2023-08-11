@@ -1,64 +1,66 @@
+#include <algorithm>
+#include <array>
 #include <iostream>
+#include <stack>
 #include <string>
 #include <vector>
-#include <algorithm>
-#include <stack>
-#include <array>
 
-template<class T>
+template <class T>
 class Alloc : public std::allocator<T>
 {
 public:
-	T* allocate(const size_t count) //override
-	{
+    T* allocate(const size_t count)
+    {
 
-		T* result = bytes + used_count;
-		used_count += count;
-		return result;
-	}
+        T* result = bytes + used_count;
+        used_count += count;
+        return result;
+    }
 
-	void deallocate(T* const ptr, const size_t count) //override
-	{
-		used_count -= count;
-	}
+    void deallocate(T* const ptr, const size_t count)
+    {
+        used_count -= count;
+    }
 
 private:
-	char bytes[128];
-	int used_count = 0;
+    char bytes[128];
+    int used_count = 0;
 };
 
-class Solution {
+class Solution
+{
 public:
-	bool isValid(const std::string& s) {
-		char open_braces[] = { '(', '[', '{' };
-		char close_braces[] = { ')', ']', '}' };
+    bool isValid(const std::string& s)
+    {
+        char open_braces[] = { '(', '[', '{' };
+        char close_braces[] = { ')', ']', '}' };
 
-		std::stack<char, std::vector<char, Alloc<char>>> st;
-		for (char ch : s)
-		{
-			auto end = open_braces + 3;
-			if (std::find(open_braces, end, ch) != end)
-			{
-				st.push(ch);
-			}
-			else
-			{
-				size_t index = std::distance(close_braces, std::find(close_braces, close_braces + 3, ch));
-				if (st.empty() || st.top() != open_braces[index])
-				{
-					return false;
-				}
-				st.pop();
-			}
-		}
+        std::stack<char, std::vector<char, Alloc<char>>> st;
+        for (char ch : s)
+        {
+            auto end = open_braces + 3;
+            if (std::find(open_braces, end, ch) != end)
+            {
+                st.push(ch);
+            }
+            else
+            {
+                size_t index = std::distance(close_braces, std::find(close_braces, close_braces + 3, ch));
+                if (st.empty() || st.top() != open_braces[index])
+                {
+                    return false;
+                }
+                st.pop();
+            }
+        }
 
-		return st.empty();
-	}
+        return st.empty();
+    }
 };
 
 int main()
 {
-	Solution s;
+    Solution s;
 
-	std::cout << s.isValid("()[]{}") << std::endl;
+    std::cout << s.isValid("()[]{}") << std::endl;
 }

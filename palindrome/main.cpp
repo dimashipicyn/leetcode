@@ -1,31 +1,32 @@
 #include <iostream>
 #include <string>
 
-
-class Solution {
+class Solution
+{
 public:
-	bool isPalindrome(int x) {
-		std::string pal = std::to_string(x);
+    bool isPalindrome(int x)
+    {
+        std::string pal = std::to_string(x);
 
-		auto begin = pal.begin();
-		auto end = pal.end();
+        auto begin = pal.begin();
+        auto end = pal.end();
 
-		while (begin < end)
-		{
-			if (*begin != *(--end))
-			{
-				return false;
-			}
-			++begin;
-		}
+        while (begin < end)
+        {
+            if (*begin != *(--end))
+            {
+                return false;
+            }
+            ++begin;
+        }
 
-		return true;
-	}
+        return true;
+    }
 };
 
 int main()
 {
-	Solution s;
+    Solution s;
 
-	std::cout << s.isPalindrome(11) << std::endl;
+    std::cout << s.isPalindrome(11) << std::endl;
 }
