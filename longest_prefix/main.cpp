@@ -6,7 +6,7 @@
 class Solution
 {
 public:
-    std::string longestCommonPrefix(std::vector<std::string>& strs)
+    std::string longestCommonPrefix(const std::vector<std::string>& strs)
     {
         std::string prefix;
 
